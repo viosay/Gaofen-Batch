@@ -1,13 +1,12 @@
 # nodejs
 node_modules/
-package-lock.json
+# package-lock.json
 
 # electron-builder
 dist/
 
 # pyinstaller
 build/
-main.spec
 
 # venv
 venv/
