@@ -65,11 +65,11 @@
 4. 编译Python：
 
     ```bash
-    pip install pyinstaller
-    pyinstaller main.py
+    pip install nuitka
+    nuitka main.py --standalone
     ```
 
-    编译完成后会在build文件夹中生成`main`文件夹, 请`main`文件夹重命名为`bin`。
+    编译完成后会在目录中生成`main.dist`文件夹, 请`main.dist`文件夹重命名为`bin`。
 
 5. 配置Orfeo Toolbox
 
@@ -83,9 +83,13 @@
 
 1. 可用的OTB版本有哪些？
 
-    目前仅使用`OTB-8.1.2-Win64`进行了测试，如果在其他版本中出现了问题，请提交issue。
+    目前仅使用 `OTB-8.1.2-Win64` 以及 `OTB-9.0.0-Win64` 进行了测试，如果在其他版本中出现了问题，请提交issue。
 
-2. 有关跨平台支持
+2. 我看不懂编译说明
+
+    请移步 `Github Action`查看具体执行流程 ，本项目的自动编译由Github Action驱动。
+
+3. 有关跨平台支持
 
     由于Electron的特性，本程序理论上支持跨平台运行，但尚未进行测试。
 

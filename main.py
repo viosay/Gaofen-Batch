@@ -424,7 +424,9 @@ if __name__ == "__main__":
     elif glob(join(appPath, 'OTB-*-Win64')):
         otbPath = glob(join(appPath, 'OTB-*-Win64'))[0]
     else:
-        assert False, "OTB not found, please download and install it from https://www.orfeo-toolbox.org/"
+        logger.error(f"OTB not found in{os.path.abspath('.')},\n please downl oadfrom https://www.orfeo-toolbox.org/")
+        logger.error(f"OTB not found in:{appPath},\n please downl oadfrom https://www.orfeo-toolbox.org/")
+        assert False,f"OTB not found in:{appPath},\n please downl oadfrom https://www.orfeo-toolbox.org/"
 
 
     os.environ['GDAL_DATA'] = join(otbPath, r"share\data")

@@ -8,6 +8,12 @@ dist/
 # pyinstaller
 build/
 
+# nuitka
+main.build/
+main.dist/
+main.onefile-build
+main.exe
+
 # venv
 venv/
 

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
 jobs:
   build_and_pack:
     runs-on: windows-latest
@@ -76,16 +76,14 @@ jobs:
         run: |
            mkdir "dist/win-unpacked/bin/OTB-9.0.0-Win64"
            pip install -r requirements.txt
-           pip install pyinstaller    
-           pyinstaller main.py
+           pip install nuitka 
+           nuitka main.py
            npm install
            npm run pack
 
-           cp -r "data" "build/main/data" 
-           cd build
-           ren main bin
-           cd ..
-           cp -r "build/bin" "dist/win-unpacked/"
+           cp -r "data" "main.dist" 
+           ren "main.dist" "bin"
+           cp -r "bin" "dist/win-unpacked/"
            cp -r "OTB-9.0.0-Win64" "dist/win-unpacked/bin"
            dir dist
            dir "dist/win-unpacked"
@@ -93,40 +91,7 @@ jobs:
 
            cd dist/win-unpacked/
            7z a -tzip GaoFen-Batch.zip .
-           
-      # - name: Build/release Electron app
-      #   uses: paneron/action-electron-builder@v1.8.1
-      #   with:
-      #     # GitHub token, automatically provided to the action
-      #     # (No need to define this secret in the repo settings)
-      #     github_token: ${{ secrets.github_token }}
-      #     package_manager: npm
-      #     # If the commit is tagged with a version (e.g. "v1.0.0"),
-      #     # release the app after building
-      #     # release: ${{ startsWith(github.ref, 'refs/tags/v') }}
-      #     release: false
-      
 
-      # - name: package asst
-      #   shell: cmd
-      #   run: |
-      #     mkdir "dist/win-unpacked/bin/OTB-9.0.0-Win64"
-      #     cp -r "data" "build/main/data" 
-      #     cd build
-      #     ren main bin
-      #     cd ..
-      #     cp -r "build/bin" "dist/win-unpacked/"
-      #     cp -r "OTB-9.0.0-Win64" "dist/win-unpacked/bin"
-      #     dir dist
-      #     dir "dist/win-unpacked"
-      #     dir "dist/win-unpacked/bin"
-          
-
-      # - name: zip files
-      #   run: |
-      #    cd dist/win-unpacked/
-      #    7z a -tzip GaoFen-Batch.zip .
-         
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
