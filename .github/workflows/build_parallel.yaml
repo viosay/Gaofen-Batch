@@ -62,11 +62,12 @@ jobs:
       - name: building
         run: |
            pip install -r requirements.txt
-           pip install nuitka 
-           nuitka main.py
+           pip install pyinstaller
+           pyinstaller main.py
 
-           cp -r "data" "main.dist" 
-           ren "main.dist" "bin"
+           cp -r "data" "dist/main" 
+           cp -r "dist/main" "."
+           ren "main" "bin"
 
            7z a -tzip bin.zip bin/*
 
@@ -115,6 +116,7 @@ jobs:
         run: |
            npm install
            npm run pack
+           tree
 
       - name: Upload
         uses: actions/upload-artifact@v4
@@ -122,14 +124,14 @@ jobs:
           # Artifact name
           name: electron_app
           # A file, directory or wildcard pattern that describes what to upload
-          path: "build/win-unpacke/*"
+          path: "dist/win-unpacked"
 
   pack_app:
     needs: [download_otb, build_python_app, build_electron_app]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download0artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           # Name of the artifact to download.
           # If unspecified, all artifacts for the run are downloaded.
@@ -166,23 +168,36 @@ jobs:
           # Optional. Default is ${{ github.run_id }}
           # run-id: 
       
-      - uses: actions/download0artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           # Name of the artifact to download.
           # If unspecified, all artifacts for the run are downloaded.
           # Optional.
-          name: OTB-9.0.0-Win64
+          name: bin
 
-      - uses: actions/download0artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           # Name of the artifact to download.
           # If unspecified, all artifacts for the run are downloaded.
           # Optional.
           name: electron_app
+          path: win_64
           
       - run: |
+          7z x -o"win_64" "bin.zip" 
+          7z x -o"win_64/bin" "OTB-9.0.0-Win64.zip"
           dir
-          dir bin
-          dir electron_app
-          dir OTB-9.0.0-Win64
-    
+          dir "win_64"
+          dir "win_64/bin"
+          dir "win_64/bin/OTB-9.0.0-Win64"
+          7z a -tzip win_64.zip win_64/*
+
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          # Artifact name
+          name: GFB_2.0_win_64
+          # A file, directory or wildcard pattern that describes what to upload
+          path: "win_64.zip"
+  

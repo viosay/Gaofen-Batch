@@ -66,16 +66,16 @@
 
     ```bash
     pip install nuitka
-    nuitka main.py --standalone
+    pyinstaller main.py
     ```
 
-    编译完成后会在目录中生成`main.dist`文件夹, 请`main.dist`文件夹重命名为`bin`。
+    编译完成后会在`dist`目录中生成`main`目录, 请`main`重命名为`bin`。
 
 5. 配置Orfeo Toolbox
 
     下载[Orfeo Toolbox](https://www.orfeo-toolbox.org/download/)，并解压。
 
-    并将解压好的`OTB-*-Win64`文件夹与本项目附带的`data`文件夹一起放入上一步制作的`bin`文件夹中。
+    并将解压好的`OTB-*-Win64`文件夹与本项目附带的`data`文件夹一起放入上一步的`bin`文件夹中。
 
 6. 将`bin`文件夹放入打包好的Electron文件夹中
 
@@ -87,7 +87,9 @@
 
 2. 我看不懂编译说明
 
-    请移步 `Github Action`查看具体执行流程 ，本项目的自动编译由Github Action驱动。
+    ~~请移步 `Github Action`查看具体执行流程 ，本项目的自动编译由Github Action驱动。~~ 还没调试好。
+    
+    **请不要在生产环境使用action内编译的版本，他们不一定是稳定的！**
 
 3. 有关跨平台支持
 
@@ -96,3 +98,11 @@
     可以自行安装对应平台的OTB并修改源码进行尝试。
 
     欢迎提交PR！
+
+## TODO
+
+- [ ] 解决action编译版无法使用的问题
+
+- [ ] Linux支持
+
+- [ ] 支持高分系列15米级数据正射校正

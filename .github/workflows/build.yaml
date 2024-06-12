@@ -38,7 +38,7 @@ jobs:
           key: ${{ runner.os }}-otb-${{ hashFiles('**/main.py') }}
           restore-keys: |
             ${{ runner.os }}-otb-            
-      - if: steps.otb-cache.outputs.cache-hit != 'true'
+      - if: ${{ steps.otb-cache.outputs.cache-hit != 'true'}}
         name: download OTB-9.0.0-Win64.zip
         uses: gamedev-thingy/Download-Extract@done
         with:
@@ -74,17 +74,19 @@ jobs:
 
       - name: building and pack
         run: |
-           mkdir "dist/win-unpacked/bin/OTB-9.0.0-Win64"
            pip install -r requirements.txt
-           pip install nuitka 
-           nuitka main.py
+           pip install pyinstaller
+           pyinstaller main.py
            npm install
            npm run pack
+           
+           cp -r "dist/main" "."
+           ren "main" "bin"
 
-           cp -r "data" "main.dist" 
-           ren "main.dist" "bin"
-           cp -r "bin" "dist/win-unpacked/"
+           cp -r "bin" "dist/win-unpacked"
            cp -r "OTB-9.0.0-Win64" "dist/win-unpacked/bin"
+           cp -r "data" "dist/win-unpacked/bin"
+           dir
            dir dist
            dir "dist/win-unpacked"
            dir "dist/win-unpacked/bin"
