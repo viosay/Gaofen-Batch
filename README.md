@@ -65,7 +65,7 @@
 4. 编译Python：
 
     ```bash
-    pip install nuitka
+    pip install pyinstaller
     pyinstaller main.py
     ```
 

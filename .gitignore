@@ -21,5 +21,7 @@ venv/
 # vscode
 .vscode/
 
+# jetbrains
+.idea/
 
 build.bat
