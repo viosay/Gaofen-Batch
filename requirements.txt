@@ -1,5 +1,4 @@
 loguru
-numpy
 PyYAML
 rasterio
 tqdm
