@@ -1,4 +1,8 @@
 loguru
 PyYAML
-rasterio
 tqdm
+rasterio
+
+# numpy will be installed by rasterio
+# numpy
+
