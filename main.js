@@ -14,7 +14,7 @@ function createWindow() {
             contextIsolation: false,
         },
         icon: path.join(__dirname, './assets/app_icon.ico'),
-        title: 'Gaofen Batch'
+        title: '卫星遥感影像预处理'
     });
 
     // Set the default menu to null to remove it
