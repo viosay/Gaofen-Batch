@@ -34,14 +34,6 @@
             align-items: center;
         }
 
-        #githubLink {
-            background: url('https://raw.githubusercontent.com/primer/octicons/main/icons/mark-github-16.svg') no-repeat center;
-            background-size: 34px 34px;
-            width: 34px;
-            height: 34px;
-            display: inline-block;
-        }
-
 
         .icon-button {
             border: none;
@@ -271,7 +263,6 @@
                 <button class="icon-button" id="clean" title="清空文件列表"><i
                         class="material-icons">cleaning_services</i></button>
             </div>
-            <a href="#" id="githubLink" title="GitHub Homepage"></a>
         </div>
 
         <div class="settings-modal" id="settingsModal">
@@ -391,9 +382,6 @@
         document.getElementById('settings').addEventListener('click', openSettings);
         document.getElementById('cancel').addEventListener('click', closeSettings);
         document.getElementById('clean').addEventListener('click', clearFileContainer);
-        document.getElementById('githubLink').addEventListener('click', () => {
-            shell.openExternal('https://github.com/GenghisYoung233/Gaofen-Batch');
-        });
 
         // Listener for receiving selected files
         ipcRenderer.on('selected-files', (event, files) => {
