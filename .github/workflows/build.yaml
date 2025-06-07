@@ -26,11 +26,11 @@ jobs:
           python-version: '3.10'
           cache: 'pip' # caching pip dependencies
 
-      - run: mkdir OTB-9.0.0-Win64
+      - run: mkdir OTB-9.1.1-Win64
       - name: Get otb cache directory
         id: otb-cache
         shell: pwsh
-        run: echo "dir=$(pwd)\OTB-9.0.0-Win64" >> ${env:GITHUB_OUTPUT}
+        run: echo "dir=$(pwd)\OTB-9.1.1-Win64" >> ${env:GITHUB_OUTPUT}
       - name: otb cache
         uses: actions/cache@v3
         with:
@@ -39,12 +39,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-otb-            
       - if: ${{ steps.otb-cache.outputs.cache-hit != 'true'}}
-        name: download OTB-9.0.0-Win64.zip
+        name: download OTB-9.1.1-Win64.zip
         uses: gamedev-thingy/Download-Extract@done
         with:
           url: https://www.orfeo-toolbox.org/packages/OTB-9.0.0-Win64.zip
-          destination: OTB-9.0.0-Win64
-          ZIPname: OTB-9.0.0-Win64
+          destination: OTB-9.1.1-Win64
+          ZIPname: OTB-9.1.1-Win64
  
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -84,7 +84,7 @@ jobs:
            ren "main" "bin"
 
            cp -r "bin" "dist/win-unpacked"
-           cp -r "OTB-9.0.0-Win64" "dist/win-unpacked/bin"
+           cp -r "OTB-9.1.1-Win64" "dist/win-unpacked/bin"
            cp -r "data" "dist/win-unpacked/bin"
            dir
            dir dist
