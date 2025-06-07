@@ -42,7 +42,7 @@ jobs:
         name: download OTB-9.1.1-Win64.zip
         uses: gamedev-thingy/Download-Extract@done
         with:
-          url: https://www.orfeo-toolbox.org/packages/OTB-9.0.0-Win64.zip
+          url: https://www.orfeo-toolbox.org/packages/OTB-9.1.1-Win64.zip
           destination: OTB-9.1.1-Win64
           ZIPname: OTB-9.1.1-Win64
  
